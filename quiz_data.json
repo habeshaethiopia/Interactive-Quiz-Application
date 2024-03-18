@@ -1,0 +1,152 @@
+[
+    {
+        "title": "Python Quiz",
+        "description": "Test your Python knowledge",
+        "questions": [
+            {
+                "content": "What is Python?",
+                "options": [
+                    {"content": "A programming language", "is_correct": true},
+                    {"content": "A snake", "is_correct": false},
+                    {"content": "A food", "is_correct": false}
+                ]
+            },
+            {
+                "content": "Which one of the following is NOT a Python data type?",
+                "options": [
+                    {"content": "Integer", "is_correct": false},
+                    {"content": "Float", "is_correct": false},
+                    {"content": "Boolean", "is_correct": false},
+                    {"content": "Map", "is_correct": true}
+                ]
+            },
+            {
+                "content": "What is the result of 2 + 3 * 4?",
+                "options": [
+                    {"content": "20", "is_correct": false},
+                    {"content": "14", "is_correct": true},
+                    {"content": "15", "is_correct": false},
+                    {"content": "11", "is_correct": false}
+                ]
+            },
+            {
+                "content": "Which statement is used to exit a loop?",
+                "options": [
+                    {"content": "break", "is_correct": true},
+                    {"content": "continue", "is_correct": false},
+                    {"content": "exit", "is_correct": false},
+                    {"content": "return", "is_correct": false}
+                ]
+            },
+            {
+                "content": "What will the following code output?\nprint(bool([]))",
+                "options": [
+                    {"content": "True", "is_correct": false},
+                    {"content": "False", "is_correct": true}
+                ]
+            }
+        ]
+    },
+    {
+        "title": "General Knowledge Quiz",
+        "description": "Test your general knowledge",
+        "questions": [
+            {
+                "content": "What is the capital of France?",
+                "options": [
+                    {"content": "London", "is_correct": false},
+                    {"content": "Berlin", "is_correct": false},
+                    {"content": "Paris", "is_correct": true},
+                    {"content": "Madrid", "is_correct": false}
+                ]
+            },
+            {
+                "content": "Who wrote 'Romeo and Juliet'?",
+                "options": [
+                    {"content": "William Shakespeare", "is_correct": true},
+                    {"content": "Charles Dickens", "is_correct": false},
+                    {"content": "Jane Austen", "is_correct": false},
+                    {"content": "Mark Twain", "is_correct": false}
+                ]
+            },
+            {
+                "content": "What is the chemical symbol for water?",
+                "options": [
+                    {"content": "W", "is_correct": false},
+                    {"content": "H2O", "is_correct": true},
+                    {"content": "O2", "is_correct": false},
+                    {"content": "H", "is_correct": false}
+                ]
+            },
+            {
+                "content": "Which planet is known as the Red Planet?",
+                "options": [
+                    {"content": "Earth", "is_correct": false},
+                    {"content": "Mars", "is_correct": true},
+                    {"content": "Jupiter", "is_correct": false},
+                    {"content": "Saturn", "is_correct": false}
+                ]
+            },
+            {
+                "content": "Who painted the Mona Lisa?",
+                "options": [
+                    {"content": "Pablo Picasso", "is_correct": false},
+                    {"content": "Leonardo da Vinci", "is_correct": true},
+                    {"content": "Vincent van Gogh", "is_correct": false},
+                    {"content": "Michelangelo", "is_correct": false}
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Math Quiz",
+        "description": "Test your math skills",
+        "questions": [
+            {
+                "content": "What is the square root of 64?",
+                "options": [
+                    {"content": "8", "is_correct": true},
+                    {"content": "6", "is_correct": false},
+                    {"content": "10", "is_correct": false},
+                    {"content": "4", "is_correct": false}
+                ]
+            },
+            {
+                "content": "What is the value of pi (π) to two decimal places?",
+                "options": [
+                    {"content": "3.14", "is_correct": true},
+                    {"content": "3.16", "is_correct": false},
+                    {"content": "3.12", "is_correct": false},
+                    {"content": "3.18", "is_correct": false}
+                ]
+            },
+            {
+                "content": "What is the sum of angles in a triangle?",
+                "options": [
+                    {"content": "90 degrees", "is_correct": false},
+                    {"content": "180 degrees", "is_correct": true},
+                    {"content": "270 degrees", "is_correct": false},
+                    {"content": "360 degrees", "is_correct": false}
+                ]
+            },
+            {
+                "content": "What is the value of 5 factorial (5!)?",
+                "options": [
+                    {"content": "10", "is_correct": false},
+                    {"content": "20", "is_correct": false},
+                    {"content": "120", "is_correct": true},
+                    {"content": "60", "is_correct": false}
+                ]
+            },
+            {
+                "content": "If a car travels at 60 miles per hour, how far will it travel in 3 hours?",
+                "options": [
+                    {"content": "120 miles", "is_correct": false},
+                    {"content": "180 miles", "is_correct": true},
+                    {"content": "200 miles", "is_correct": false},
+                    {"content": "240 miles", "is_correct": false}
+                ]
+            }
+        ]
+    }
+]
