@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <form method="POST" action="/login">
+        <!-- CSRF Token -->
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        
+        <!-- Username Input -->
+        {{error}}
+        <div>
+            <label for="username">Username:</label>
+            {{form.username.errors}}
+            <input type="text" id="username" name="username" required>
+        </div>
+
+        <!-- Password Input -->
+        <div>
+            {{form.password.errors}}
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit">Log In</button>
+    </form>
+</body>
+</html>
