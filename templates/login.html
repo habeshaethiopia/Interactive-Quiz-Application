@@ -1,33 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
-<body>
-    <h2>Login</h2>
-    <form method="POST" action="/login">
-        <!-- CSRF Token -->
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        
-        <!-- Username Input -->
-        {{error}}
-        <div>
-            <label for="username">Username:</label>
-            {{form.username.errors}}
-            <input type="text" id="username" name="username" required>
-        </div>
+{% extends "base.html" %}
+{%block title%}
+Login
+{%endblock%}
 
-        <!-- Password Input -->
-        <div>
-            {{form.password.errors}}
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
 
-        <!-- Submit Button -->
-        <button type="submit">Log In</button>
-    </form>
-</body>
-</html>
+
+{% block content %}
+<div class="container pt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10 offset-md-3">
+            <h2>Login</h2>
+            <form method="POST" action="/login" >
+                <!-- CSRF Token -->
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                <!-- Username Input -->
+                <div class="form-group row">
+                    <label for="username" class="col-sm-2 col-form-label">Username:</label>
+                    <div class="col-sm-6">
+                        <input type="text" id="username" name="username" class="form-control" required>
+                    </div>
+                </div>
+
+                <!-- Password Input -->
+                <div class="form-group row">
+                    <label for="password" class="col-sm-2 col-form-label">Password:</label>
+                    <div class="col-sm-6">
+                        <input type="password" id="password" name="password" class="form-control" required>
+                    </div>
+                </div>
+
+                <!-- Remember Me Checkbox -->
+                <div class="row mb-4">
+                    <div class="col d-flex justify-content-center">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="rememberMe" checked>
+                            <label class="form-check-label" for="rememberMe">Remember me</label>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <!-- Forgot Password Link -->
+                        <a href="/forgot-password">Forgot password?</a>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4">Log In</button>
+
+                <!-- Register Link -->
+                <div class="text-center">
+                    <p>Not a member? <a href="/register">Register</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{%endblock%}
+
+<h2>Login</h2>
+<form method="POST" action="/login">
+    <!-- CSRF Token -->
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    <!-- Username Input -->
+    {{error}}
+    <div>
+        <label for="username">Username:</label>
+        {{form.username.errors}}
+        <input type="text" id="username" name="username" required>
+    </div>
+
+    <!-- Password Input -->
+    <div>
+        {{form.password.errors}}
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit">Log In</button>
+</form>
