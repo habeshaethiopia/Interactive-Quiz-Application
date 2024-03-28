@@ -3,8 +3,8 @@
 import uuid
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import relationship
-from utils import hash_password
+from flask_login import UserMixin
+from App.utils import hash_password
 db = SQLAlchemy()
 
 class Quiz(db.Model):
@@ -12,7 +12,7 @@ class Quiz(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text)
-    questions = relationship('Question', backref='quiz', cascade='all, delete-orphan')
+    questions = db.relationship('Question', backref='quiz', cascade='all, delete-orphan')
     # questions = db.relationship('Question', backref='quiz', lazy=True)
 
 class Question(db.Model):
@@ -29,7 +29,7 @@ class Option(db.Model):
     content = db.Column(db.Text, nullable=False)
     is_correct = db.Column(db.Boolean, default=False)
     question_id = db.Column(db.Integer, db.ForeignKey('questions.id'), nullable=False)
-class User(db.Model):
+class User(UserMixin, db.Model):
     id = db.Column(db.String(36), primary_key=True, default=str(uuid.uuid4()))  # User ID using UUID4
     username = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
@@ -40,3 +40,5 @@ class User(db.Model):
 
     def check_password(self, password):
         return hash_password(password)==self.password
+    def get_id(self):
+        return str(self.id)

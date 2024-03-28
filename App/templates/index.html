@@ -8,7 +8,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container">
-    <h1>Welcome to My Flask App</h1>
+    <h1>Welcome {{current_user.username}}</h1>
     <p>This is a simple Flask application with Bootstrap integration.</p>
     <a href="/login" class="btn btn-primary">Login</a>
     <a href="/register" class="btn btn-success">Register</a>

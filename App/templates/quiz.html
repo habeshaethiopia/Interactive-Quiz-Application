@@ -1,0 +1,22 @@
+
+    {% extends "base.html" %}
+
+
+
+        {% block title %}
+        Available Quizzes
+        {% endblock %}
+    
+        {% block content %}
+        <h1 class="pt-5">Available Quizzes</h1>
+        {% for quiz in quizzes %}
+        <li>
+            <a href="/quiz/{{ quiz.id }}">{{ quiz.title }}</a>
+            <form action="/quiz/{{ quiz.id }}/delete" method="post" style="display:inline;">
+                
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+    {% endfor %}
+    {%endblock%}
+    

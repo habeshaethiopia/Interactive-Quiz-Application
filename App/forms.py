@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 '''
-module to handle registration
+module to handle registration and login
 '''
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
