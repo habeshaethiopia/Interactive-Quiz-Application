@@ -6,84 +6,92 @@ Login
 
 
 {% block content %}
-<div class="container pt-5">
+<div class="container py-5">
     <div class="row justify-content-center">
-        <div class="col-md-10 offset-md-3">
-            <h2>Login</h2>
-            <form method="POST" action="/login" >
-                <!-- CSRF Token -->
+        <div class="col-md-6 shadow rounded p-4">
+            <h2 class="text-center mb-4">Login to Your Account</h2>
+            
+            <form id="loginForm" method="POST" action="/login">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-
-                <!-- Username Input -->
-                {{error}}
-                <div class="form-group row">
-                    <label for="username" class="col-sm-2 col-form-label">Username:</label>
-                    <div class="col-sm-6">
-                        <input type="text" id="username" name="username" class="form-control" required>
-                    </div>
+                <div class="alert alert-danger fade show d-none mt-4" id="login-error">
+                    Invalid username or password. Please try again.
                 </div>
 
-                <!-- Password Input -->
-                <div class="form-group row">
-                    <label for="password" class="col-sm-2 col-form-label">Password:</label>
-                    <div class="col-sm-6">
-                        <input type="password" id="password" name="password" class="form-control" required>
-                    </div>
+                <div class="form-group mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" id="username" name="username" class="form-control"
+                        placeholder="Enter your username" required>
+                    <div class="invalid-feedback" id="username-error"></div>
                 </div>
 
-                <!-- Remember Me Checkbox -->
-                <div class="row mb-4">
-                    <div class="col d-flex justify-content-center">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="rememberMe" checked>
-                            <label class="form-check-label" for="rememberMe">Remember me</label>
-                        </div>
-                    </div>
-
-                    <div class="col">
-                        <!-- Forgot Password Link -->
-                        <a href="/forgot-password">Forgot password?</a>
-                    </div>
+                <div class="form-group mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" name="password" class="form-control"
+                        placeholder="Enter your password" required>
+                    <div class="invalid-feedback" id="password-error"></div>
+                    <small class="form-text text-muted">Forgot your password? <a href="/forgot-password">Click
+                            here</a></small>
                 </div>
 
-                <!-- Submit Button -->
-                <button type="submit" class="btn btn-primary btn-block mb-4">Log In</button>
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
+                    <label class="form-check-label" for="rememberMe">Remember Me</label>
+                </div>
 
-                <!-- Register Link -->
-                <div class="text-center">
-                    <p>Not a member? <a href="/register">Register</a></p>
+                <button type="submit" class="btn btn-primary btn-block" id="submitButton">Log In</button>
+
+                <div class="text-center mt-4">
+                    <p class="mb-0">New to this platform? <a href="/register">Register Now</a></p>
                 </div>
             </form>
+
         </div>
     </div>
 </div>
+<script>
+   const loginForm = document.getElementById("loginForm");
+const usernameError = document.getElementById("username-error");
+const passwordError = document.getElementById("password-error");
+const loginError = document.getElementById("login-error");
 
+loginForm.addEventListener("submit", function(event) {
+  event.preventDefault(); // Prevent default form submission
+
+  // Clear any previous errors
+  usernameError.textContent = "";
+  passwordError.textContent = "";
+  loginError.classList.add("d-none");
+
+  // Simulate AJAX request (replace with actual logic)
+  fetch("/login", {
+    method: "POST",
+    body: new FormData(loginForm) // Assuming form data submission
+  })
+  .then(response => {
+    if (response.ok) {
+      // Handle successful login (e.g., redirect to user dashboard)
+      console.log("Login successful:", response);
+      // ... (redirect logic)
+      window.location.href = "/";
+    } else {
+      // Handle login failure (display appropriate error messages)
+      response.text().then(text => {
+        if (text.includes("invalid username")) {
+          usernameError.textContent = "Invalid username.";
+        } else if (text.includes("invalid password")) {
+          passwordError.textContent = "Invalid password.";
+        } else {
+          loginError.textContent = "Invalid username or password";
+          loginError.classList.remove("d-none");
+        }
+      });
+    }
+  })
+  .catch(error => {
+    console.error("Login failed:", error);
+    loginError.textContent = "An error occurred. Please try again later.";
+    loginError.classList.remove("d-none");
+  });
+});
+</script>
 {%endblock%}
-
-<h2>Login</h2>
-<form method="POST" action="/login">
-    <!-- CSRF Token -->
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-
-    <!-- Username Input -->
-    {{error}}
-    <div>
-        <label for="username">Username:</label>
-        {% for error in form.username.errors %}
-            <span class="error">{{ error }}</span><br>
-        {% endfor %}
-        <input type="text" id="username" name="username" required>
-    </div>
-
-    <!-- Password Input -->
-    <div>
-        {% for error in form.password.errors %}
-            <span class="error">{{ error }}</span><br>
-        {% endfor %}
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-    </div>
-
-    <!-- Submit Button -->
-    <button type="submit">Log In</button>
-</form>

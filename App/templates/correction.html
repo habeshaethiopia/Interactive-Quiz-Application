@@ -1,0 +1,25 @@
+{%block title%}
+correction
+{%endblock%}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Quiz Correction</h2>
+    <div class="card">
+        <div class="card-body">
+            {% for i in range(totalQuestions) %}
+                <div class="mb-3">
+                    <p><strong>Question {{ i+1 }}:</strong> {{ quiz.questions[i].content }}</p>
+                    <p><strong>Correct Answer(s):</strong> {{ quiz.questions[i].answer | join(', ') }}</p>
+                    <p><strong>Your Answer(s):</strong> 
+                        {% if selectedAnswers[i] %}
+                            {{ selectedAnswers[i] | join(', ') }}
+                        {% else %}
+                            No answer selected
+                        {% endif %}
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

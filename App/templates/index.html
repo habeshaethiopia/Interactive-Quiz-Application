@@ -1,37 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz List</title>
-</head>
 {% extends "base.html" %}
+{% block title %}
+Home
+{% endblock %}
 {% block content %}
 <div class="container">
-    <h1>Welcome {{current_user.username}}</h1>
-    <p>This is a simple Flask application with Bootstrap integration.</p>
-    <a href="/login" class="btn btn-primary">Login</a>
-    <a href="/register" class="btn btn-success">Register</a>
+    <h1 class="display-4">Discover Your True Personality with Our Quiz App!</h1>
+    <p class="lead">Take our fun and insightful quiz to uncover hidden aspects of your personality. Gain valuable insights and self-awareness in just a few minutes!</p>
+    <a href="/quiz" class="btn btn-primary btn-lg">Start Quiz Now</a>
+    <img src="static/pic/people.jpg" class="img-fluid mt-4" alt="Diverse group of people engaging with the quiz">
+    <hr>
+    <h2>Features:</h2>
+    <ul>
+        <li>Personalized Results: Receive customized results based on your answers to our carefully crafted questions.</li>
+        <li>Insightful Analysis: Gain a deeper understanding of yourself through our detailed analysis of your responses.</li>
+        <li>Shareable Results: Share your results with friends and compare your personality traits.</li>
+    </ul>
+    <h2>Benefits:</h2>
+    <ul>
+        <li>Understand Yourself Better</li>
+        <li>Discover Hidden Talents and Strengths</li>
+        <li>Have Fun and Learn Something New</li>
+        <li>Connect with Like-Minded Individuals</li>
+    </ul>
+    
+   
+    <h2>FAQs:</h2>
+    <dl>
+        <dt>How long does the quiz take?</dt>
+        <dd>The quiz typically takes about 5-10 minutes to complete.</dd>
+        <dt>Are the results accurate?</dt>
+        <dd>Our quiz is designed to provide insightful and accurate results based on your responses.</dd>
+    </dl>
+    <h2>Limited-Time Offer:</h2>
+    <p>Get Started Now and Receive a Free Personality Analysis!</p>
+    <h2>Contact Information:</h2>
+    <p>Have questions? Contact us at support@quizapp.com or call 1-800-QUIZ-APP.</p>
 </div>
 
-<body>
-    <h1>Available Quizzes</h1>
-    <ul>
-        {% for quiz in quizzes %}
-            <li>
-                <a href="/quiz/{{ quiz.id }}">{{ quiz.title }}</a>
-                <form action="/quiz/{{ quiz.id }}/delete" method="post" style="display:inline;">
-                    
-                    <button type="submit">Delete</button>
-                </form>
-            </li>
-        {% endfor %}
-    </ul>
-    <ul>
-        <li><a href="/register">Sign Up</a></li>
-        <li><a href="/login">Log In</a></li>
-        <li><a href="/logout">Log Out</a></li>
-    </ul>
-</body>
-</html>
 {% endblock %}

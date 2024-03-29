@@ -7,10 +7,18 @@
     <title>Quiz App</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
+<style>
+    body {
+        background-color: aquamarine solid
+        ;
+
+        background-image: url("../static/pic/download\ \(1\).jpeg");
+    }
+</style>
 
 <body>
 
-    <div class="container mt-5">
+    <div class="container mt-5" id="ques">
         <h2 class="text-center">Quiz Questions</h2>
         <div class="card">
             <div class="card-header bg-primary text-white">
@@ -19,12 +27,10 @@
             </div>
             <div class="card-body">
                 <div id="question-container" class="mb-3">
-                    <!-- Question content will be dynamically loaded here -->
                 </div>
-                <div id="option-container" class="mb-3">
-                    <!-- Options for the current question will be dynamically loaded here -->
+                <div id="option-container" class="mb-3"> </div>
+                <div id="timer" class="mb-3 position-relative"> Timer: <span id="time-left" class="smoke"></span>
                 </div>
-                <div id="timer" class="mb-3">Timer: <span id="time-left"></span></div>
                 <div class="d-flex justify-content-between">
                     <button id="prev-btn" class="btn btn-primary" onclick="prevQuestion()">Previous</button>
                     <button id="next-btn" class="btn btn-primary" onclick="nextQuestion()"></button>
@@ -33,13 +39,23 @@
             </div>
         </div>
     </div>
+    <div class="correction">
+
+    </div>
+
+    <style>
+        .hover-effect:hover {
+            background-color: #eee;
+            cursor: pointer;
+        }
+    </style>
     <!-- <script src="{{ url_for('static', filename='assets/quiz.js') }}"></script> -->
     <script>
         var quizData = {{quiz | tojson | safe}};
         var totalQuestions = quizData.questions.length;
         var currentQuestion = 0;
         var timerInterval;
-        var timeLeft = 60; // Set timer duration in seconds
+        var timeLeft = 60000 * totalQuestions; // Set timer duration in seconds
         var selectedAnswers = []; // To track the selected answers
         for (var i = 0; i < totalQuestions; i++) {
             selectedAnswers.push([]);
@@ -51,10 +67,13 @@
                 currentQuestion].content;
             var optionsHtml = '';
             quizData.questions[currentQuestion].options.forEach(function (option, index) {
+                console.log(option)
+
                 var isChecked = selectedAnswers[currentQuestion] && selectedAnswers[currentQuestion].includes(
-                    index) ? 'checked' : '';
+                    option) ? 'checked' : '';
                 optionsHtml +=
-                    '<div class="form-check"><input class="form-check-input" type="checkbox" value="' + index +
+                    '<div class="form-check hover-effect"><input class="form-check-input" type="checkbox" value="' +
+                    index +
                     '" id="option' + index + '"' + isChecked + '><label class="form-check-label" for="option' +
                     index + '">' +
                     String.fromCharCode(index + 65) + ') ' + option +
@@ -102,32 +121,222 @@
         function submitQuiz() {
             clearInterval(timerInterval);
             displayResult();
+
+
         }
 
         function displayResult() {
+            const ques = document.getElementById('ques');
+            ques.style.display = 'none';
             // Calculate the result
             var correctAnswers = 0;
             for (var i = 0; i < totalQuestions; i++) {
                 // Check if the selected answers for this question match the correct answers
-                console.log(JSON.stringify(selectedAnswers[i].sort()),JSON.stringify(quizData.questions[i].answer.sort()))
+                console.log(JSON.stringify(selectedAnswers[i].sort()), JSON.stringify(quizData.questions[i].answer
+                    .sort()))
                 if (JSON.stringify(selectedAnswers[i].sort()) === JSON.stringify(quizData.questions[i].answer.sort())) {
                     correctAnswers++;
                 }
             }
             console.log(selectedAnswers)
 
-            // Display the result
-            alert('Quiz submitted! You got ' + correctAnswers + ' out of ' + totalQuestions + ' correct.');
+            // Create a modal dialog box to display the result and options
+            var modalContent = document.createElement('div');
+            modalContent.innerHTML = `
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Quiz Result</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick='quizes()'>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>You got ${correctAnswers} out of ${totalQuestions} correct.</p>
+                    <p>Do you want to:</p>
+                    <button type="button" class="btn btn-primary" onclick="tryAgain()">Try Again</button>
+                    <button type="button" class="btn btn-secondary" onclick="viewCorrections()">View Corrections</button>
+                </div>
+            </div>
+        </div>
+    `;
+            // Append the modal content to the body
+            document.body.appendChild(modalContent);
+
+            // Show the modal
+            modalContent.style.display = 'block';
+        }
+        //redirect to quizes
+        function quizes() {
+            window.location.href = '/quiz';
+        }
+        // Function to try the quiz again
+        function tryAgain() {
+            // Redirect or reload the page to try the quiz again
+            window.location.reload(); // Reloads the current page
+            // or window.location.href = '/quiz'; // Redirects to the quiz page
+        }
+
+        // Function to view corrections
+        function viewCorrections() {
+            let corrections = {};
+
+            for (let i = 0; i < selectedAnswers.length; i++) {
+                let question = quizData.questions[i].content;
+                let user_answer = selectedAnswers[i];
+                let correct_answer = quizData.questions[i].answer;
+
+                corrections[question] = {
+                    user_answer: user_answer,
+                    correct_answer: correct_answer
+                };
+            }
+            // Input validation (optional)
+            if (typeof corrections !== 'object' || !corrections) {
+                console.error("Error: 'corrections' argument must be a valid object.");
+                return;
+            }
+
+            // Create the modal container (outer div)
+            const modalContainer = document.createElement('div');
+            modalContainer.classList.add('modal');
+            modalContainer.setAttribute('tabindex', '-1');
+            modalContainer.setAttribute('aria-labelledby', 'correctionsModalLabel');
+            modalContainer.style.display = 'none'; // Initially hidden
+
+            // Modal dialog (inner div)
+            const modalDialog = document.createElement('div');
+            modalDialog.classList.add('modal-dialog');
+
+            // Modal content (another div)
+            const modalContent = document.createElement('div');
+            modalContent.classList.add('modal-content');
+
+            // Modal header
+            const modalHeader = document.createElement('div');
+            modalHeader.classList.add('modal-header');
+
+            // Modal title
+            const modalTitle = document.createElement('h5');
+            modalTitle.classList.add('modal-title');
+            modalTitle.id = 'correctionsModalLabel';
+            modalTitle.textContent = 'Quiz Corrections';
+
+            // Close button
+            const closeButton = document.createElement('button');
+            closeButton.type = 'button';
+            closeButton.classList.add('btn-close');
+            closeButton.setAttribute('aria-label', 'Close');
+            closeButton.addEventListener('click', function () {
+                modalContainer.style.display = 'none'; // Hide modal on click
+            });
+
+            // Modal body
+            const modalBody = document.createElement('div');
+            modalBody.classList.add('modal-body', 'overflow-auto');
+            modalBody.style.maxHeight = '70vh';
+            modalBody.style.padding = '1rem';
+            modalBody.style.backgroundColor = 'rgb(250, 250, 250)'; // Light gray background for better contrast
+            modalBody.style.color = 'rgb(40, 40, 40)'; // Darker text color
+            modalBody.style.fontFamily = 'sans-serif'; // User-friendly font family
+            modalBody.style.fontSize = '16px'; // Adjust font size as needed
+            // Function to create a correction element (individual question and answer)
+            function createCorrectionElement(question, details) {
+                const correctionDiv = document.createElement('div');
+                correctionDiv.classList.add('correction', 'card', 'border-primary', 'mb-3', 'p-3', 'shadow');
+
+                const questionEl = document.createElement('h4');
+                questionEl.classList.add('card-title', 'text-primary', 'mb-3');
+                let questions = Object.keys(corrections);
+                let index = questions.indexOf(question);
+                questionEl.textContent = index +1+'. ' +question;
+                
+                let answerStatus = 'Incorrect';
+                if (JSON.stringify(details.user_answer.sort()) === JSON.stringify(details.correct_answer.sort())) {
+                    answerStatus = 'Correct!';
+                }
+                const answerStatusEl = document.createElement('p');
+                answerStatusEl.classList.add('answer-status', 'font-weight-bold');
+                answerStatusEl.textContent = answerStatus;
+
+                const userAnswerEl = document.createElement('p');
+                userAnswerEl.classList.add('user-answer', 'text-muted', 'mb-1');
+                userAnswerEl.textContent = `Your answer: ${details.user_answer}`;
+
+                const correctAnswerEl = document.createElement('p');
+                correctAnswerEl.classList.add('correct-answer', 'text-success', 'mb-1');
+                correctAnswerEl.textContent = `Correct answer: ${details.correct_answer}`;
+
+                const explanationEl = document.createElement('p');
+                explanationEl.classList.add('explanation', 'text-muted', 'mb-0');
+                explanationEl.textContent = `Explanation: ${details.explanation || 'No explanation provided.'}`;
+
+                correctionDiv.appendChild(questionEl);
+                correctionDiv.appendChild(answerStatusEl);
+                correctionDiv.appendChild(userAnswerEl);
+                correctionDiv.appendChild(correctAnswerEl);
+                correctionDiv.appendChild(explanationEl);
+
+                return correctionDiv;
+            }
+
+            console.log(corrections)
+            for (let question in corrections) {
+                let user_answer = corrections[question].user_answer;
+                let correct_answer = corrections[question].correct_answer;
+                console.log(question, user_answer, correct_answer);
+                const correctionElement = createCorrectionElement(question, corrections[question]);
+                modalBody.appendChild(correctionElement);
+                // Do something with question, user_answer, and correct_answer
+            }
+            // Assemble the modal content
+            modalHeader.appendChild(modalTitle);
+            modalHeader.appendChild(closeButton);
+            modalContent.appendChild(modalHeader);
+            modalContent.appendChild(modalBody);
+            modalDialog.appendChild(modalContent);
+            modalContainer.appendChild(modalDialog);
+
+            // Add the modal container to the body (assuming you have a body element)
+            document.body.appendChild(modalContainer);
+
+            // Function to show the modal
+            function showModal() {
+                modalContainer.style.display = 'block'; // Make modal visible
+            }
+
+            // Call showModal to display the corrections
+            showModal();
         }
 
         function updateTimer() {
-            document.getElementById('time-left').innerText = timeLeft;
+            // Check if timeLeft is defined (avoid potential errors)
+            if (typeof timeLeft === 'undefined') {
+                console.error("Error: 'timeLeft' variable is not defined.");
+                return;
+            }
+
+            // Calculate minutes and seconds from remaining milliseconds
+            const minutes = Math.floor(timeLeft / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+            // Format the time string with leading zeros
+            const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            // Update the timer display
+            document.getElementById('time-left').textContent = formattedTime;
+
+            // Decrement timeLeft in milliseconds for next iteration
+            timeLeft -= 1000;
+
+            // Check if time is up
             if (timeLeft <= 0) {
                 clearInterval(timerInterval);
                 submitQuiz();
             }
-            timeLeft--;
+
         }
+
 
         // Start timer
         timerInterval = setInterval(updateTimer, 1000);

@@ -4,6 +4,7 @@ from flask_login import current_user,LoginManager, UserMixin,login_user, login_r
 from App.model import db, Quiz, Question, Option, User
 app = Flask(__name__)
 login_manager = LoginManager(app)
+
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///quiz.db"
 app.config["SECRET_KEY"] = "IjA3ZGI2Zjc3YjI1Y2E0NGZkZTY1ZmRmYjBlZWExNjQ0MGFiNzgw"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
