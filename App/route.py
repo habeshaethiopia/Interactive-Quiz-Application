@@ -170,7 +170,10 @@ def user_dashboard():
     attempts = user.attempts  # Or retrieve attempts from a separate model
     return render_template("dashboard.html", user=user, attempts=attempts)
 
-
+#forgot-password route
+@app.route("/forgot-password", strict_slashes=False)
+def forgot_password():
+    return jsonify({"message": "Forgot password", 'status': 'not implemented'})
 # Logout route
 @app.route("/logout", strict_slashes=False)
 @login_required

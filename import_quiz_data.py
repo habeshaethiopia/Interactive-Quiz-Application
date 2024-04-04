@@ -3,9 +3,9 @@
     from a json file"""
 
 import json
-from app import app
+from App import app
 
-from model import db, Quiz, Question, Option
+from App.model import db, Quiz, Question, Option
 def import_quiz_data():
     with app.app_context():
         with open("quiz_data.json", "r") as file:

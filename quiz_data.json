@@ -99,6 +99,164 @@
         ]
     },
     {
+        "title": "JavaScript Fundamentals Quiz",
+        "description": "Test your knowledge of JavaScript basics",
+        "questions": [
+            {
+                "content": "What is JavaScript?",
+                "options": [
+                    { "content": "A styling language for webpages", "is_correct": false },
+                    { "content": "A high-level, interpreted programming language", "is_correct": true },
+                    { "content": "A server-side scripting language", "is_correct": false },
+                    { "content": "A markup language for webpages", "is_correct": false }
+                ]
+            },
+            {
+                "content": "What is the correct way to declare a variable in JavaScript?",
+                "options": [
+                    { "content": "var name = 'John';", "is_correct": true },
+                    { "content": "let name = 'John';", "is_correct": true },
+                    { "content": "const name = 'John';", "is_correct": true },
+                    { "content": "int name = 'John';", "is_correct": false }
+                ]
+            },
+            {
+                "content": "How do you display a message in a browser using JavaScript?",
+                "options": [
+                    { "content": "console.log('Hello World!');", "is_correct": false },
+                    { "content": "alert('Hello World!');", "is_correct": true },
+                    { "content": "print('Hello World!');", "is_correct": false },
+                    { "content": "document.write('Hello World!');", "is_correct": false }
+                ]
+            },
+            {
+                "content": "What is the difference between '===' and '==' in JavaScript?",
+                "options": [
+                    { "content": "'===' checks for strict equality (value and type), while '==' only checks for value equality.", "is_correct": true },
+                    { "content": "'===' and '==' are identical in JavaScript.", "is_correct": false },
+                    { "content": "'===' only checks for value equality, while '==' checks for strict equality (value and type).", "is_correct": false }
+                ]
+            },
+            {
+                "content": "What is an array in JavaScript?",
+                "options": [
+                    { "content": "An ordered collection of items of any data type.", "is_correct": true },
+                    { "content": "A single value that can hold multiple data types.", "is_correct": false },
+                    { "content": "A data structure for storing key-value pairs.", "is_correct": false }
+                ]
+            },
+            {
+                "content": "How do you access the second element of an array named 'myColors' in JavaScript?",
+                "options": [
+                    { "content": "myColors[1];", "is_correct": true },
+                    { "content": "myColors.second;", "is_correct": false },
+                    { "content": "myColors.get(2);", "is_correct": false },
+                    { "content": "myColors.secondElement();", "is_correct": false }
+                ]
+            },
+            {
+                "content": "What does the 'for' loop syntax look like in JavaScript?",
+                "options": [
+                    {
+                        "content": "`javascript\nfor (let i = 0; i < length; i++) {\n  // code to be executed\n}\n`",
+                        "is_correct": true
+                    },
+                    {
+                        "content": "`javascript\nfor (let i = 0; i <= length; i++) {\n  // code to be executed\n}\n`",
+                        "is_correct": true
+                    },
+                    {
+                        "content": "`javascript\nfor (let i = length; i >= 0; i--) {\n  // code to be executed\n}\n`",
+                        "is_correct": true
+                    }
+                ]
+            },
+            {
+                "content": "What are some common ways to handle errors in JavaScript?",
+                "options": [
+                    { "content": "Using 'try...catch' blocks", "is_correct": true },
+                    { "content": "Checking for error codes returned by functions", "is_correct": true },
+                    { "content": "Using 'if...else' statements to handle errors", "is_correct": false },
+                    { "content": "Ignoring errors and continuing execution", "is_correct": false }
+                ]
+            }
+        ]
+    }
+    ,
+    {
+        "title": "Geography Challenge",
+        "description": "Test your geographical knowledge around the world",
+        "questions": [
+          {
+            "content": "Which continent is home to the Great Barrier Reef?",
+            "options": [
+              { "content": "Africa", "is_correct": false },
+              { "content": "Asia", "is_correct": false },
+              { "content": "Australia", "is_correct": true },
+              { "content": "South America", "is_correct": false }
+            ]
+          },
+          {
+            "content": "What is the highest mountain in the world?",
+            "options": [
+              { "content": "Mount Everest", "is_correct": true },
+              { "content": "K2", "is_correct": false },
+              { "content": "Mount Kilimanjaro", "is_correct": false },
+              { "content": "Denali", "is_correct": false }
+            ]
+          },
+          {
+            "content": "Which of the following countries is NOT bordered by the Mediterranean Sea?",
+            "options": [
+              { "content": "Italy", "is_correct": false },
+              { "content": "Egypt", "is_correct": true },
+              { "content": "Greece", "is_correct": false },
+              { "content": "Spain", "is_correct": false }
+            ]
+          },
+          {
+            "content": "What is the capital of Brazil?",
+            "options": [
+              { "content": "Rio de Janeiro", "is_correct": false },
+              { "content": "São Paulo", "is_correct": false },
+              { "content": "Brasília", "is_correct": true },
+              { "content": "Buenos Aires", "is_correct": false }
+            ]
+          },
+          {
+            "content": "Which two of the following countries are landlocked?",
+            "options": [
+              { "content": "Austria", "is_correct": true },
+              { "content": "Bolivia", "is_correct": true },
+              { "content": "Canada", "is_correct": false },
+              { "content": "Australia", "is_correct": false }
+            ]
+          },
+          {
+            "content": "What is the largest desert in the world?",
+            "options": [
+              { "content": "Sahara Desert", "is_correct": true },
+              { "content": "Gobi Desert", "is_correct": false } 
+            ]
+          },
+          {
+            "content": "What major river flows through London?",
+            "options": [
+              { "content": "River Thames", "is_correct": true },
+              { "content": "Seine River", "is_correct": false } 
+            ]
+          },
+          {
+            "content": "Which country has the most islands in the world?",
+            "options": [
+              { "content": "Indonesia", "is_correct": true },
+              { "content": "Finland", "is_correct": true }
+            ]
+          }
+        ]
+      }
+    ,
+    {
         "title": "Math Quiz",
         "description": "Test your math skills",
         "questions": [

@@ -3,21 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}My Flask App{% endblock %}</title>
+    <title>{% block title %}Quiz web app{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <style>
     body {
-        background-image: url("/static/pic/3580.jpg");
+        /* background-image: url("/static/pic/3580.jpg");
         background-repeat:no-repeat ;
         background-size:cover;
         /* background-size: auto; */
-        color: white;
+        /* color: white; */ */
     }
+
+    .bg-gradient {
+  background-image: linear-gradient(to right, lightblue, lightpink);
+}
 </style>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">My Flask App</a>
+        <a class="navbar-brand" href="/">Quiz web app</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

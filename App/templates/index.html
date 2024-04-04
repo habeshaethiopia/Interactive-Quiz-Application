@@ -2,39 +2,57 @@
 {% block title %}
 Home
 {% endblock %}
-{% block content %}
-<div class="container">
-    <h1 class="display-4">Discover Your True Personality with Our Quiz App!</h1>
-    <p class="lead">Take our fun and insightful quiz to uncover hidden aspects of your personality. Gain valuable insights and self-awareness in just a few minutes!</p>
-    <a href="/quiz" class="btn btn-primary btn-lg">Start Quiz Now</a>
-    <img src="static/pic/people.jpg" class="img-fluid mt-4" alt="Diverse group of people engaging with the quiz">
-    <hr>
-    <h2>Features:</h2>
-    <ul>
-        <li>Personalized Results: Receive customized results based on your answers to our carefully crafted questions.</li>
-        <li>Insightful Analysis: Gain a deeper understanding of yourself through our detailed analysis of your responses.</li>
-        <li>Shareable Results: Share your results with friends and compare your personality traits.</li>
-    </ul>
-    <h2>Benefits:</h2>
-    <ul>
-        <li>Understand Yourself Better</li>
-        <li>Discover Hidden Talents and Strengths</li>
-        <li>Have Fun and Learn Something New</li>
-        <li>Connect with Like-Minded Individuals</li>
-    </ul>
-    
-   
-    <h2>FAQs:</h2>
-    <dl>
-        <dt>How long does the quiz take?</dt>
-        <dd>The quiz typically takes about 5-10 minutes to complete.</dd>
-        <dt>Are the results accurate?</dt>
-        <dd>Our quiz is designed to provide insightful and accurate results based on your responses.</dd>
-    </dl>
-    <h2>Limited-Time Offer:</h2>
-    <p>Get Started Now and Receive a Free Personality Analysis!</p>
-    <h2>Contact Information:</h2>
-    <p>Have questions? Contact us at support@quizapp.com or call 1-800-QUIZ-APP.</p>
-</div>
 
+{% block content %}
+<div class="container d-flex flex-column align-items-center py-5 bg-gradient" style="width: 100%;">
+  <h1 class="display-4 text-center text-gradient">
+    Welcome to back {{current_user.username}}!
+    <br>
+    <br>Discover Your True Personality with Our Quiz App!</h1>
+  <p class="lead text-center">Take our fun and insightful quiz to uncover hidden aspects of yourself. Gain valuable insights and self-awareness in just a few minutes!</p>
+  <a href="/quiz" class="btn btn-primary btn-lg px-4">Start Quiz Now</a>
+  <hr class="my-5">
+
+  <div class="row row-cols-1 row-cols-md-2 gap-4">
+    <div class="card bg-light border-0 shadow-sm">
+      <div class="card-body">
+        <h2>Features:</h2>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item fw-bold">Personalized Results</li>
+          <li class="list-group-item">Receive customized results based on your answers.</li>
+          <li class="list-group-item fw-bold">Insightful Analysis</li>
+          <li class="list-group-item">Gain a deeper understanding of yourself.</li>
+          <li class="list-group-item fw-bold">Shareable Results</li>
+          <li class="list-group-item">Share your results and compare with friends.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card bg-light border-0 shadow-sm">
+      <div class="card-body">
+        <h2>Benefits:</h2>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item fw-bold">Understand Yourself Better</li>
+          <li class="list-group-item">Discover hidden talents and strengths.</li>
+          <li class="list-gradient list-group-item fw-bold">Have Fun and Learn Something New</li>
+          <li class="list-group-item">Connect with like-minded individuals.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <h2>FAQs:</h2>
+  <dl class="row">
+    <dt class="col-sm-4">How long does the quiz take?</dt>
+    <dd class="col-sm-8">The quiz typically takes about 5-10 minutes to complete.</dd>
+    <dt class="col-sm-4">Are the results accurate?</dt>
+    <dd class="col-sm-8">Our quiz is designed to provide insightful and accurate results based on your responses.</dd>
+  </dl>
+
+  <h2>Limited-Time Offer:</h2>
+  <p class="text-center text-danger fw-bold">Get Started Now and Receive a Free Personality Analysis!</p>
+
+  <h2>Contact Information:</h2>
+  <p class="text-center">Have questions? Contact us at adanemoges6@gmail.com or call 
+  +251 983 763 133.</p>
+</div>
 {% endblock %}
