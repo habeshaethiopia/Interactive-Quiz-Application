@@ -12,7 +12,6 @@ from flask_login import (
     logout_user,
 )
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin
 from sqlalchemy.orm import relationship
 from flask import redirect, url_for, request, session, make_response
 from flask import Flask, render_template, jsonify, flash
@@ -56,7 +55,8 @@ def display_quiz(quiz_id):
     }
     print(jsonify(quiz_dict))
     return render_template("takeQuiz.html", quiz=quiz_dict)
-
+#not working right now
+'''
 @app.route('/submit_quiz', methods=['POST'])
 def submit_quiz():
     if request.method == 'POST':
@@ -66,13 +66,14 @@ def submit_quiz():
 
         # Redirect to the correction page with quiz data and user's attempt answers
         return redirect(url_for('correction', quiz=json.dumps(quiz_data), user_answers=json.dumps(user_answers)))
-
+#not working write now
 @app.route('/correction')
 def correction():
     quiz = json.loads(request.args.get('quiz'))  # Get quiz data from URL parameters
     user_answers = json.loads(request.args.get('user_answers'))  # Get user's attempt answers from URL parameters
 
     return render_template('correction.html', quiz=quiz, user_answers=user_answers)
+'''
 @app.route("/quiz/<int:quiz_id>/delete", methods=["POST"], strict_slashes=False)
 @login_required
 def delete_quiz(quiz_id):
